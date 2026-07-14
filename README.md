@@ -4,6 +4,8 @@
 [![Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-c9ff36)](LICENSE)
 [![Arm64 native](https://img.shields.io/badge/runner-native%20Arm64-ff6b35)](https://github.com/FreakyAI-star/armforge-ci/actions)
 
+![ArmForge CI cover](assets/armforge-ci-cover.png)
+
 **Optimization claims with receipts.** ArmForge CI turns an ONNX model into an Arm64-targeted
 INT8 model, runs a controlled FP32-versus-INT8 benchmark on native Arm hardware, validates output
 quality, and publishes both human-readable and machine-readable evidence.
@@ -103,4 +105,3 @@ action.yml             reusable composite GitHub Action
 ArmForge CI is Apache-2.0 licensed. The default MiniLM model is also Apache-2.0 and is downloaded
 from a pinned Hugging Face revision; it is not redistributed in this repository. Arm and related
 marks belong to their respective owners. This project is an independent hackathon submission.
-
