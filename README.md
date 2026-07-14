@@ -3,6 +3,7 @@
 [![Native Arm64 evidence](https://github.com/FreakyAI-star/armforge-ci/actions/workflows/benchmark.yml/badge.svg)](https://github.com/FreakyAI-star/armforge-ci/actions/workflows/benchmark.yml)
 [![Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-c9ff36)](LICENSE)
 [![Arm64 native](https://img.shields.io/badge/runner-native%20Arm64-ff6b35)](https://github.com/FreakyAI-star/armforge-ci/actions)
+[![Devpost](https://img.shields.io/badge/Devpost-submitted-003e54)](https://devpost.com/software/armforge-ci-ykgpbf)
 
 ![ArmForge CI cover](assets/armforge-ci-cover.png)
 
@@ -30,6 +31,7 @@ often omit the controls needed to trust them.
 - [Readable benchmark report](benchmarks/latest.md)
 - [Raw benchmark JSON](benchmarks/latest.json)
 - [Public evidence dashboard](https://freakyai-star.github.io/armforge-ci/)
+- [Official Devpost submission](https://devpost.com/software/armforge-ci-ykgpbf)
 - [Benchmark methodology](docs/methodology.md)
 - [System architecture](docs/architecture.md)
 
