@@ -27,7 +27,12 @@ def _numpy_type(onnx_type: str) -> np.dtype:
     return np.dtype(np.float32)
 
 
-def make_inputs(session: object, batch_size: int, sequence_length: int, seed: int) -> dict[str, np.ndarray]:
+def make_inputs(
+    session: object,
+    batch_size: int,
+    sequence_length: int,
+    seed: int,
+) -> dict[str, np.ndarray]:
     rng = np.random.default_rng(seed)
     feeds: dict[str, np.ndarray] = {}
     for item in session.get_inputs():
@@ -127,4 +132,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import shutil
-import urllib.request
 from pathlib import Path
+from urllib import request
 
 
 DEFAULT_REPOSITORY = "sentence-transformers/all-MiniLM-L6-v2"
@@ -31,8 +31,8 @@ def download_default_model(destination: Path) -> Path:
         f"{DEFAULT_REVISION}/{DEFAULT_FILENAME}?download=true"
     )
     temporary = destination.with_suffix(destination.suffix + ".part")
-    request = urllib.request.Request(url, headers={"User-Agent": "ArmForge-CI/0.1"})
-    with urllib.request.urlopen(request, timeout=120) as response, temporary.open("wb") as output:
+    model_request = request.Request(url, headers={"User-Agent": "ArmForge-CI/0.1"})
+    with request.urlopen(model_request, timeout=120) as response, temporary.open("wb") as output:
         shutil.copyfileobj(response, output)
 
     actual = sha256_file(temporary)
@@ -57,4 +57,3 @@ def quantize_for_arm64(source: Path, destination: Path) -> Path:
         extra_options={"WeightSymmetric": True},
     )
     return destination
-
