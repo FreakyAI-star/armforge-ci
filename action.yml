@@ -1,0 +1,38 @@
+name: ArmForge CI
+description: Quantize an ONNX model and publish native Arm64 benchmark evidence
+branding:
+  icon: activity
+  color: orange
+inputs:
+  runs:
+    description: Number of measured inference runs
+    required: false
+    default: "50"
+  warmups:
+    description: Number of warm-up runs
+    required: false
+    default: "10"
+  sequence-length:
+    description: Synthetic token sequence length
+    required: false
+    default: "128"
+  output:
+    description: Directory for JSON and Markdown evidence
+    required: false
+    default: benchmarks
+runs:
+  using: composite
+  steps:
+    - name: Install ArmForge CI
+      shell: bash
+      run: python -m pip install "$GITHUB_ACTION_PATH"
+    - name: Benchmark on native Arm64
+      shell: bash
+      run: >-
+        armforge
+        --runs "${{ inputs.runs }}"
+        --warmups "${{ inputs.warmups }}"
+        --sequence-length "${{ inputs.sequence-length }}"
+        --output "${{ inputs.output }}"
+        --require-arm64
+

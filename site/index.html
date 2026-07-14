@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Native Arm64 ONNX optimization evidence from ArmForge CI" />
+    <title>ArmForge CI — Native Arm64 evidence</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="brand" href="#top" aria-label="ArmForge CI home">
+        <span class="brand-mark">AF</span><span>ArmForge CI</span>
+      </a>
+      <a class="repo" href="https://github.com/FreakyAI-star/armforge-ci">View source ↗</a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <p class="eyebrow">Cloud AI · native Arm64 · reproducible CI</p>
+        <h1>Optimization claims<br /><span>with receipts.</span></h1>
+        <p class="lede">
+          ArmForge CI quantizes real ONNX language models for Arm64, benchmarks them on native
+          hardware, validates numerical quality, and publishes the evidence automatically.
+        </p>
+        <div class="status"><span></span><strong id="status">Loading latest benchmark…</strong></div>
+      </section>
+
+      <section class="metric-grid" aria-label="Benchmark improvements">
+        <article><p>Model size</p><strong id="size">—</strong><small>smaller</small></article>
+        <article><p>Mean latency</p><strong id="latency">—</strong><small>lower</small></article>
+        <article><p>Throughput</p><strong id="throughput">—</strong><small>higher</small></article>
+        <article><p>Output cosine</p><strong id="cosine">—</strong><small>quality retained</small></article>
+      </section>
+
+      <section class="evidence">
+        <div>
+          <p class="eyebrow">Before / after</p>
+          <h2>One model. Same inputs.<br />A fair comparison.</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Metric</th><th>FP32</th><th>Arm64 INT8</th></tr></thead>
+            <tbody>
+              <tr><td>Model size</td><td id="base-size">—</td><td id="opt-size">—</td></tr>
+              <tr><td>Mean latency</td><td id="base-latency">—</td><td id="opt-latency">—</td></tr>
+              <tr><td>P95 latency</td><td id="base-p95">—</td><td id="opt-p95">—</td></tr>
+              <tr><td>Throughput</td><td id="base-throughput">—</td><td id="opt-throughput">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="pipeline">
+        <p class="eyebrow">The evidence pipeline</p>
+        <div class="steps">
+          <article><span>01</span><h3>Pin</h3><p>Download an exact model revision and verify its SHA-256 digest.</p></article>
+          <article><span>02</span><h3>Forge</h3><p>Apply per-channel signed INT8 dynamic quantization for Arm64 inference.</p></article>
+          <article><span>03</span><h3>Measure</h3><p>Run isolated FP32 and INT8 workers on a native four-core Arm64 runner.</p></article>
+          <article><span>04</span><h3>Prove</h3><p>Gate numerical quality and publish raw JSON plus a readable report.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>Apache-2.0 · built in public</span><span id="generated">Benchmark pending</span></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
+

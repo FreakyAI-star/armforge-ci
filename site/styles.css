@@ -1,0 +1,71 @@
+:root {
+  color-scheme: dark;
+  --ink: #f6f3ea;
+  --muted: #aaa89f;
+  --line: rgba(255, 255, 255, 0.13);
+  --orange: #ff6b35;
+  --acid: #c9ff36;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 84% 8%, rgba(255, 107, 53, 0.18), transparent 25rem),
+    radial-gradient(circle at 8% 54%, rgba(201, 255, 54, 0.08), transparent 30rem),
+    #0b0b0d;
+}
+
+.nav, main, footer { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+.nav { height: 84px; display: flex; align-items: center; justify-content: space-between; }
+.brand { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 12px; font-weight: 750; }
+.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; color: #0b0b0d; background: var(--acid); font-size: 12px; border-radius: 3px; transform: rotate(-3deg); }
+.repo { color: var(--ink); text-decoration: none; padding-bottom: 4px; border-bottom: 1px solid var(--muted); font-size: 14px; }
+.hero { min-height: 660px; padding: 100px 0 80px; position: relative; }
+.hero::after { content: "A64"; position: absolute; right: -2%; top: 65px; z-index: -1; font-size: clamp(12rem, 26vw, 24rem); line-height: .8; font-weight: 900; color: rgba(255,255,255,.025); letter-spacing: -.09em; }
+.eyebrow { color: var(--acid); text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 750; }
+h1 { margin: 22px 0 30px; max-width: 960px; font-size: clamp(4rem, 9.5vw, 8.6rem); line-height: .84; letter-spacing: -.075em; }
+h1 span { color: var(--orange); }
+.lede { max-width: 690px; color: #c9c5bb; font-size: clamp(18px, 2vw, 23px); line-height: 1.55; }
+.status { margin-top: 42px; display: flex; align-items: center; gap: 11px; font-size: 13px; text-transform: uppercase; letter-spacing: .09em; }
+.status span { width: 9px; height: 9px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 20px var(--acid); }
+.metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-right: 0; }
+.metric-grid article { min-height: 220px; padding: 30px; border-right: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-end; }
+.metric-grid p, .metric-grid small { color: var(--muted); margin: 0; }
+.metric-grid strong { margin: auto 0 3px; color: var(--acid); font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -.06em; }
+.evidence { padding: 150px 0; display: grid; grid-template-columns: .85fr 1.15fr; gap: 70px; align-items: start; }
+h2 { font-size: clamp(2.6rem, 5vw, 5rem); line-height: .98; letter-spacing: -.055em; }
+.table-wrap { border-top: 1px solid var(--line); }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 21px 12px; border-bottom: 1px solid var(--line); text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+td:last-child { color: var(--acid); font-weight: 750; }
+.pipeline { padding: 60px 0 150px; }
+.steps { margin-top: 35px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+.steps article { padding: 30px 28px 20px 0; }
+.steps span { color: var(--orange); font: 700 12px ui-monospace, monospace; }
+.steps h3 { font-size: 28px; margin: 60px 0 10px; }
+.steps p { color: var(--muted); line-height: 1.6; }
+footer { min-height: 110px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+
+@media (max-width: 820px) {
+  .hero { min-height: 570px; padding-top: 70px; }
+  .metric-grid { grid-template-columns: 1fr 1fr; }
+  .metric-grid article { min-height: 170px; }
+  .evidence { grid-template-columns: 1fr; padding: 100px 0; }
+  .steps { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 520px) {
+  .nav, main, footer { width: min(100% - 24px, 1180px); }
+  h1 { font-size: 4rem; }
+  .metric-grid, .steps { grid-template-columns: 1fr; }
+  .repo { font-size: 0; }
+  .repo::after { content: "GitHub ↗"; font-size: 13px; }
+  footer { align-items: flex-start; flex-direction: column; justify-content: center; gap: 8px; }
+}
+

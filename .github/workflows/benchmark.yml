@@ -1,0 +1,86 @@
+name: Native Arm64 evidence
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "benchmarks/**"
+      - "site/benchmark.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: armforge-native-benchmark
+  cancel-in-progress: true
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Prove native architecture
+        run: |
+          test "$(uname -m)" = "aarch64"
+          lscpu
+
+      - name: Install and test
+        run: |
+          python -m pip install -e ".[dev]"
+          ruff check .
+          pytest
+
+      - name: Optimize and benchmark MiniLM
+        run: >-
+          armforge
+          --runs 75
+          --warmups 15
+          --threads 4
+          --batch-size 1
+          --sequence-length 128
+          --output benchmarks
+          --require-arm64
+
+      - name: Publish workflow summary
+        run: cat benchmarks/latest.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Prepare evidence dashboard
+        run: cp benchmarks/latest.json site/benchmark.json
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: native-arm64-benchmark-evidence
+          path: |
+            benchmarks/latest.json
+            benchmarks/latest.md
+          if-no-files-found: error
+
+      - name: Commit benchmark evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add benchmarks/latest.json benchmarks/latest.md site/benchmark.json
+          git diff --cached --quiet || git commit -m "bench: publish native Arm64 evidence [skip ci]"
+          git push
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+      - name: Deploy public dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4
+
